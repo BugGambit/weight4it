@@ -5,6 +5,10 @@
 
 Weight tracker app to simplify weight loss.
 
+## Roadmap
+
+See our [Trello board](https://trello.com/b/kRVnVFgL/weight4it-web).
+
 ## Contributing
 
 This app is created using Create React App (with the Typescript template).
