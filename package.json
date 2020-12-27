@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.8",
     "firebase": "^8.2.1",
     "react": "^17.0.1",
+    "react-burger-menu": "^3.0.2",
     "react-dom": "^17.0.1",
     "react-firebaseui": "^4.1.0",
     "react-router-dom": "^5.2.0",
@@ -52,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-burger-menu": "^2.6.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
@@ -68,6 +70,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.6",
+    "plop": "^2.7.4",
     "prettier": "^2.2.1"
   },
   "config": {
