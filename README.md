@@ -23,6 +23,14 @@ yarn start
 
 Also see the [package.json](./package.json) file for more commands.
 
+### Code generation
+
+We are using [Plop](https://www.npmjs.com/package/plop) to generate template files. So if you want to create a new component then run:
+
+```bash
+yarn plop
+```
+
 ### Commit messages
 
 The repository uses [Husky](https://www.npmjs.com/package/husky) together with [Commitizen](https://www.npmjs.com/package/commitizen) to enfore [Angular commit message convention](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type).
