@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    analytics: any;
+  }
+}
+
 function useAuth() {
   const [isLoggedIn, setIsLoggedIn] = useState<null | boolean>(null);
   const [user, setUser] = useState<null | firebase.User>(null);
@@ -9,11 +16,11 @@ function useAuth() {
       .auth()
       .onAuthStateChanged((authUser) => {
         const isUserLoggedIn = !!authUser;
-        setIsLoggedIn(isUserLoggedIn);
+        setIsLoggedIn(!!authUser);
         setUser(authUser);
         if (isUserLoggedIn) {
-          // const { email } = authUser;
-          // window.analytics.identify(email);
+          const { email } = authUser as firebase.User;
+          window.analytics.identify(email);
         }
       });
     return unregisterAuthObserver;

@@ -17,3 +17,5 @@ if (!firebase.apps.length) {
 } else {
   firebase.app(); // if already initialized, use that one
 }
+
+export default firebase;
