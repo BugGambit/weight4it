@@ -19,6 +19,11 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
