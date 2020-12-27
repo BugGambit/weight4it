@@ -6,6 +6,7 @@ import LandingScreen from 'containers/LandingScreen/LandingScreen';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from 'constants/theme';
 import 'api/firebase';
+import LogoutScreen from 'containers/LogoutScreen/LogoutScreen';
 
 const Container = styled.div`
   position: absolute;
@@ -13,7 +14,7 @@ const Container = styled.div`
   height: 100%;
   font-family: 'Roboto', sans-serif;
   background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.foregroundColor};
 `;
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
           <Switch>
             <Route path="/login">
               <LoginScreen />
+            </Route>
+            <Route path="/logout">
+              <LogoutScreen />
             </Route>
             <PrivateRoute path="/">
               <LandingScreen />
