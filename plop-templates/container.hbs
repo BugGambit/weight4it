@@ -11,21 +11,16 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Title = styled.b`
-  font-size: 25px;
-  text-align: center;
-`;
-
-function LandingScreen() {
+function {{ name }}() {
   const { user } = useAuth();
   return (
     <>
       <Sidebar />
       <Container>
-        <Title>Hello {user?.displayName} !</Title>
+        <p>I am a new container!</p>
       </Container>
     </>
   );
 }
 
-export default LandingScreen;
+export default {{ name }};
