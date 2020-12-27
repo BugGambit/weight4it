@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import firebase from 'firebase';
+import firebase from 'api/firebase';
 import { useHistory } from 'react-router-dom';
 import Spinner from 'components/Spinner/Spinner';
 
