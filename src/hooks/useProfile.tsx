@@ -7,7 +7,6 @@ import { FirebaseProfile } from 'store/profile';
 export default function useProfile() {
   const { user } = useAuth();
   const setProfile = useStoreActions((actions) => actions.profile.setProfile);
-  const profile = useStoreState((state) => state.profile.data);
   useEffect(() => {
     if (!user || !user.email) return () => {};
     const unsubscribe = db
@@ -33,5 +32,5 @@ export default function useProfile() {
       });
     return unsubscribe;
   }, [setProfile, user]);
-  return profile;
+  return useStoreState((state) => state.profile.data);
 }

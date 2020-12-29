@@ -39,16 +39,12 @@ const Arrow = styled(FontAwesomeIcon)`
 `;
 
 interface GoalOverviewProps {
-  currentWeight: number;
+  startWeight: number;
   targetWeight: number;
   style?: React.CSSProperties;
 }
 
-function GoalOverview({
-  currentWeight,
-  targetWeight,
-  style,
-}: GoalOverviewProps) {
+function GoalOverview({ startWeight, targetWeight, style }: GoalOverviewProps) {
   const renderWeight = (weight: number, title: string) => {
     return (
       <WeightContainer>
@@ -60,7 +56,7 @@ function GoalOverview({
 
   return (
     <Container style={style}>
-      {renderWeight(currentWeight, 'Current weight')}
+      {renderWeight(startWeight, 'Start weight')}
       <div>
         <Repeater times={3}>
           <Arrow icon={faArrowRight} />

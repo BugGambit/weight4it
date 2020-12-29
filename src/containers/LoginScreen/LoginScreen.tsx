@@ -4,6 +4,7 @@ import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useStoreActions } from 'hooks/store';
 
 const Container = styled.div`
   height: 100%;
@@ -26,6 +27,7 @@ interface LocationState {
 function LoginScreen() {
   const history = useHistory();
   const location = useLocation<LocationState>();
+  const resetStore = useStoreActions((actions) => actions.reset);
   const { from } = location.state || { from: { pathname: '/' } };
 
   // Configure FirebaseUI.
@@ -36,6 +38,7 @@ function LoginScreen() {
       signInSuccessWithAuthResult: () => {
         // setTimeout is here to make sure onAuthStateChanged is called before redirect (so the app knows it is logged in)
         setImmediate(() => {
+          resetStore();
           history.replace(from);
         });
         return true;

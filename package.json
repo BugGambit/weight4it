@@ -17,6 +17,7 @@
     "easy-peasy": "^4.0.1",
     "firebase": "^8.2.1",
     "lodash": "^4.17.20",
+    "rc-slider": "^9.7.1",
     "react": "^17.0.1",
     "react-burger-menu": "^3.0.2",
     "react-dom": "^17.0.1",
@@ -30,6 +31,7 @@
     "yarn": "^1.22.10"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -81,7 +83,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.6",
     "plop": "^2.7.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "source-map-explorer": "^2.5.1"
   },
   "config": {
     "commitizen": {
