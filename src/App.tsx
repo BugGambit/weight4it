@@ -12,7 +12,9 @@ import store from 'store';
 import ProfileScreen from 'containers/ProfileScreen/ProfileScreen';
 
 const Container = styled.div`
-  position: absolute;
+  top: 0;
+  left: 0;
+  position: fixed;
   width: 100%;
   height: 100%;
   font-family: 'Roboto', sans-serif;
