@@ -13,6 +13,7 @@ export interface Profile {
   gender: Gender;
   dateOfBirth: Date;
   heightInCm: number;
+  currentWeight: number;
 }
 
 export interface FirebaseProfile extends Omit<Profile, 'dateOfBirth'> {
@@ -30,12 +31,14 @@ export async function saveProfileToDatabase({
   gender,
   heightInCm,
   dateOfBirth,
+  currentWeight,
 }: Profile) {
   const profile: FirebaseProfile = {
     email,
     gender,
     heightInCm,
     dateOfBirth: firebase.firestore.Timestamp.fromDate(dateOfBirth),
+    currentWeight,
   };
   await db.collection('users').doc(email).set(
     {
