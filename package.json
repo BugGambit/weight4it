@@ -14,7 +14,9 @@
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "add": "^2.0.6",
+    "easy-peasy": "^4.0.1",
     "firebase": "^8.2.1",
+    "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-burger-menu": "^3.0.2",
     "react-dom": "^17.0.1",
@@ -59,9 +61,11 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.166",
     "@types/react-burger-menu": "^2.6.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.7",
+    "@types/webpack-env": "^1.16.0",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "cz-conventional-changelog": "3.3.0",

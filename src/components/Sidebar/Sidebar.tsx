@@ -2,7 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import styled from 'styled-components';
-import { faSignOutAlt, faHome } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSignOutAlt,
+  faHome,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div`
   nav {
@@ -96,6 +100,9 @@ function Sidebar() {
       <Menu right>
         <a id="home" className="menu-item" href="/">
           <FontAwesomeIcon icon={faHome} /> Home
+        </a>
+        <a id="profile" className="menu-item" href="/profile">
+          <FontAwesomeIcon icon={faUser} /> Profile
         </a>
         <a id="logout" className="menu-item" href="/logout">
           <FontAwesomeIcon icon={faSignOutAlt} /> Log out
