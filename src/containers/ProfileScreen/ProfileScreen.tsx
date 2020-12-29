@@ -38,17 +38,22 @@ const Label = styled.p`
 function ProfileScreen() {
   const history = useHistory();
   const { user } = useAuth();
+  const [currentWeight, setCurrentWeight] = useState<undefined | number>(
+    undefined
+  );
   const [gender, setGender] = useState<undefined | Gender>(undefined);
   const [height, setHeight] = useState<undefined | number>(undefined);
   const [dateOfBirth, setDateOfBirth] = useState<undefined | Date>(undefined);
   const [isSaving, setIsSaving] = useState(false);
 
   const profile = useProfile();
+  const hasProfile = !!profile;
   useEffect(() => {
     if (!profile) return;
     setGender(profile.gender);
     setHeight(profile.heightInCm);
     setDateOfBirth(profile.dateOfBirth);
+    setCurrentWeight(profile.currentWeight);
   }, [profile]);
 
   const genderMap: { [key in Gender]: string } = {
@@ -64,7 +69,8 @@ function ProfileScreen() {
       user?.email == null ||
       gender === undefined ||
       height === undefined ||
-      dateOfBirth === undefined
+      dateOfBirth === undefined ||
+      currentWeight === undefined
     ) {
       return;
     }
@@ -75,6 +81,7 @@ function ProfileScreen() {
       dateOfBirth,
       gender,
       heightInCm: height,
+      currentWeight,
     });
 
     history.push('/');
@@ -82,8 +89,17 @@ function ProfileScreen() {
 
   return (
     <Container>
-      <p>Create a profile</p>
+      <p>{hasProfile ? 'Edit profile' : 'Create a profile'}</p>
       <FormContainer onSubmit={handleSubmit}>
+        <NumberInput
+          min={0}
+          max={400}
+          value={currentWeight}
+          onChange={setCurrentWeight}
+          placeholder="Current weight (kg) *"
+          style={{ width: '100%' }}
+          required
+        />
         <Dropdown
           options={Object.values(genderMap)}
           placeholder="Gender *"
