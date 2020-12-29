@@ -11,3 +11,30 @@ export function getDaysInMonth(month: number, year: number) {
 export function hasSameYearMonthDate(date1: Date, date2: Date) {
   return date1.toLocaleDateString() === date2.toLocaleDateString();
 }
+
+export function addDays(date: Date, days: number) {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+export function dateToYMD(date: Date) {
+  const strArray = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const d = date.getDate();
+  const m = strArray[date.getMonth()];
+  const y = date.getFullYear();
+  return `${d} ${m} ${y}`;
+}

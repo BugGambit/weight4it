@@ -6,6 +6,7 @@ import {
   faSignOutAlt,
   faHome,
   faUser,
+  faBullseye,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div`
@@ -98,13 +99,16 @@ function Sidebar() {
   return (
     <Container>
       <Menu right>
-        <a id="home" className="menu-item" href="/">
+        <a className="menu-item" href="/">
           <FontAwesomeIcon icon={faHome} /> Home
         </a>
-        <a id="profile" className="menu-item" href="/profile">
+        <a className="menu-item" href="/profile">
           <FontAwesomeIcon icon={faUser} /> Profile
         </a>
-        <a id="logout" className="menu-item" href="/logout">
+        <a className="menu-item" href="/goal">
+          <FontAwesomeIcon icon={faBullseye} /> Goal
+        </a>
+        <a className="menu-item" href="/logout">
           <FontAwesomeIcon icon={faSignOutAlt} /> Log out
         </a>
       </Menu>

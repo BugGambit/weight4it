@@ -10,6 +10,9 @@ import LogoutScreen from 'containers/LogoutScreen/LogoutScreen';
 import { StoreProvider } from 'easy-peasy';
 import store from 'store';
 import ProfileScreen from 'containers/ProfileScreen/ProfileScreen';
+import GoalScreen from 'containers/GoalScreen/GoalScreen';
+import StartScreen from 'containers/StartScreen/StartScreen';
+import WeightScreen from 'containers/WeightScreen/WeightScreen';
 
 const Container = styled.div`
   top: 0;
@@ -36,8 +39,17 @@ function App() {
               <Route path="/logout">
                 <LogoutScreen />
               </Route>
-              <PrivateRoute path="/profile">
+              <PrivateRoute path="/profile" exact>
                 <ProfileScreen />
+              </PrivateRoute>
+              <PrivateRoute path="/goal" exact>
+                <GoalScreen />
+              </PrivateRoute>
+              <PrivateRoute path="/weight" exact>
+                <WeightScreen />
+              </PrivateRoute>
+              <PrivateRoute path="/start">
+                <StartScreen />
               </PrivateRoute>
               <PrivateRoute path="/">
                 <LandingScreen />
