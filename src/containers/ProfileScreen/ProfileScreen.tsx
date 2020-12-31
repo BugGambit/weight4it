@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import ProfileSettings from 'components/ProfileSettings/ProfileSettings';
 import styled from 'styled-components';
 import useProfile from 'hooks/useProfile';
+import Sidebar from 'components/Sidebar/Sidebar';
 
 const Container = styled.div`
   height: 100%;
@@ -30,10 +31,13 @@ function ProfileScreen() {
   };
 
   return (
-    <Container>
-      <Title>{hasProfile ? 'Edit profile' : 'Create a profile'}</Title>
-      <ProfileSettings onSubmit={onSubmit} />
-    </Container>
+    <>
+      <Sidebar />
+      <Container>
+        <Title>{hasProfile ? 'Edit profile' : 'Create a profile'}</Title>
+        <ProfileSettings onSubmit={onSubmit} />
+      </Container>
+    </>
   );
 }
 
