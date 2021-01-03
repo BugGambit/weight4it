@@ -2,6 +2,9 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/functions';
+import 'firebase/storage';
+import isDev from 'utils/environment';
 
 function initializeApp() {
   firebase.initializeApp({
@@ -18,6 +21,12 @@ if (!firebase.apps.length) {
   initializeApp();
 } else {
   firebase.app(); // if already initialized, use that one
+}
+
+const functions = firebase.app().functions('europe-west1');
+
+if (isDev()) {
+  functions.useEmulator('localhost', 5000);
 }
 
 export default firebase;

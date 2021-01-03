@@ -13,6 +13,7 @@ import ProfileScreen from 'containers/ProfileScreen/ProfileScreen';
 import GoalScreen from 'containers/GoalScreen/GoalScreen';
 import StartScreen from 'containers/StartScreen/StartScreen';
 import WeightScreen from 'containers/WeightScreen/WeightScreen';
+import AddFoodScreen from 'containers/AddFoodScreen/AddFoodScreen';
 
 const Container = styled.div`
   top: 0;
@@ -45,11 +46,14 @@ function App() {
               <PrivateRoute path="/goal" exact>
                 <GoalScreen />
               </PrivateRoute>
-              <PrivateRoute path="/weight" exact>
+              <PrivateRoute path="/weight/add" exact>
                 <WeightScreen />
               </PrivateRoute>
               <PrivateRoute path="/start">
                 <StartScreen />
+              </PrivateRoute>
+              <PrivateRoute path="/food/add">
+                <AddFoodScreen />
               </PrivateRoute>
               <PrivateRoute path="/">
                 <LandingScreen />

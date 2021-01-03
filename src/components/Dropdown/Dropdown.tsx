@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const DEFAULT = '';
 
 const SelectWithStyle = styled.select`
-  background-color: ${(props) => props.theme.inputBackgroundColor};
+  background-color: ${(props) => props.theme.backgroundColor};
   font-size: 16px;
   font-weight: 900;
   height: 36px;
@@ -13,6 +13,8 @@ const SelectWithStyle = styled.select`
   padding: 0 10px 0 10px;
   text-align: center;
   text-align-last: center;
+  box-shadow: 1px 1px ${(props) => props.theme.foregroundColor};
+  border-radius: 5px;
   color: ${(props) =>
     props.value === DEFAULT ? props.theme.inputPlaceholderColor : 'inherit'};
 `;

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import useAuth from 'hooks/useAuth';
 import styled from 'styled-components';
-import Sidebar from 'components/Sidebar/Sidebar';
 import Button from 'components/Button/Button';
 import NumberInput from 'components/NumberInput/NumberInput';
 import Spinner from 'components/Spinner/Spinner';
 import { useStoreActions } from 'hooks/store';
 import { updateCurrentWeight } from 'store/profile';
 import { useHistory } from 'react-router-dom';
+import PageWrapper from 'components/PageWrapper/PageWrapper';
 
 const Container = styled.div`
   height: 100%;
@@ -64,8 +64,7 @@ function WeightScreen() {
   };
 
   return (
-    <>
-      <Sidebar />
+    <PageWrapper>
       <Container>
         <FormContainer onSubmit={onSubmit}>
           <NumberInput
@@ -86,7 +85,7 @@ function WeightScreen() {
           )}
         </FormContainer>
       </Container>
-    </>
+    </PageWrapper>
   );
 }
 

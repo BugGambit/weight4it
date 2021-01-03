@@ -1,6 +1,32 @@
 import React from 'react';
 import RCSlider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import styled from 'styled-components';
+
+const SliderWithStyle = styled(RCSlider)`
+  .rc-slider-handle {
+    background-color: ${(props) => props.theme.foregroundColor};
+    border-radius: 0;
+    border: 2px solid black;
+  }
+
+  .rc-slider-rail {
+    background-color: ${(props) => props.theme.foregroundColor};
+  }
+
+  .rc-slider-step {
+    background-color: ${(props) => props.theme.foregroundColor};
+  }
+
+  .rc-slider-dot {
+    background-color: ${(props) => props.theme.foregroundColor};
+    border: 1px solid black;
+  }
+
+  .rc-slider-mark-text {
+    color: ${(props) => props.theme.foregroundColor};
+  }
+`;
 
 interface SliderProps {
   value: number;
@@ -13,7 +39,7 @@ interface SliderProps {
 
 function Slider({ value, min, max, onChange, marks, style }: SliderProps) {
   return (
-    <RCSlider
+    <SliderWithStyle
       value={value}
       min={min}
       max={max}

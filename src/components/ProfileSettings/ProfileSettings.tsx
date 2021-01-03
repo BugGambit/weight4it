@@ -20,6 +20,10 @@ const Container = styled.div`
 `;
 
 const FormContainer = styled.form`
+  padding: 10px;
+  border-radius: 5px;
+  outer-shadow: 2px 2px grey;
+  background-color: rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;

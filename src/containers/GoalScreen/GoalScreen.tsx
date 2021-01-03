@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useStoreActions } from 'hooks/store';
 import GoalSettings from 'components/GoalSettings/GoalSettings';
 import { Goal } from 'store/goal';
-import Sidebar from 'components/Sidebar/Sidebar';
+import PageWrapper from 'components/PageWrapper/PageWrapper';
 
 const Container = styled.div`
   height: 100%;
@@ -30,13 +30,12 @@ function GoalScreen() {
   };
 
   return (
-    <>
-      <Sidebar />
+    <PageWrapper>
       <Container>
         <Text>Edit goal</Text>
         <GoalSettings onSubmit={onSubmit} />
       </Container>
-    </>
+    </PageWrapper>
   );
 }
 

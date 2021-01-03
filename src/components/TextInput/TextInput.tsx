@@ -20,40 +20,34 @@ const InputWithStyle = styled.input`
   }
 `;
 
-interface NumberInputProps {
-  value: number;
-  onChange?: (value: number | undefined) => void;
+interface TextInputProps {
+  value: string;
+  onChange?: (value: string) => void;
   placeholder?: string;
-  min?: number;
-  max?: number;
   disabled?: boolean;
   readonly?: boolean;
   required?: boolean;
   style?: React.CSSProperties;
 }
 
-function NumberInput({
+function TextInput({
   value,
   onChange = () => {},
   placeholder,
-  min,
-  max,
   disabled,
   readonly,
   required,
   style,
-}: NumberInputProps) {
+}: TextInputProps) {
   return (
     <InputWithStyle
-      type="number"
+      type="text"
       value={value === undefined ? '' : value}
       onChange={(event) => {
         const valueAsString = event.target.value;
-        onChange(valueAsString === '' ? undefined : Number(valueAsString));
+        onChange(valueAsString);
       }}
       placeholder={placeholder}
-      min={min}
-      max={max}
       disabled={disabled}
       readOnly={readonly}
       required={required}
@@ -61,6 +55,6 @@ function NumberInput({
     />
   );
 }
-NumberInput.defaultProps = {} as Partial<NumberInputProps>;
+TextInput.defaultProps = {} as Partial<TextInputProps>;
 
-export default NumberInput;
+export default TextInput;

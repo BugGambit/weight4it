@@ -17,7 +17,7 @@ service firebase.storage {
                     && request.resource.size < 10 * 1024 * 1024
                     && request.resource.contentType.matches('image/.*')
                     && (resource == null || request.resource.contentType == resource.contentType)
-                    && imageId.size() < 32
+                    && imageId.size() < 64
       }
    }
   }
