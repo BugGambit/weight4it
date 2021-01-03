@@ -2,6 +2,7 @@
 import db from 'api/database';
 import { action, Action, thunk, Thunk } from 'easy-peasy';
 import firebase from 'api/firebase';
+import { stringifyDate } from 'utils/datetime';
 
 export interface Measurement {
   date: Date;
@@ -20,18 +21,6 @@ export interface MeasurementsModel {
     { email: string; measurement: Measurement }
   >;
 }
-
-function stringifyDate(date: Date) {
-  const d = date.getDate();
-  const m = date.getMonth();
-  const y = date.getFullYear();
-  return `${d}-${m + 1}-${y}`;
-}
-
-// function parseDate(str: string) {
-//   const [d, m, y] = str.split('-').map(Number);
-//   return new Date(y, m - 1, d);
-// }
 
 export async function saveMeasurementToDatabase(
   email: string,

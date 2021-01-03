@@ -39,20 +39,39 @@ export function healtyBMIRange(heightInCm: number) {
   };
 }
 
-export function generateWeightLossPlan(
-  currentWeight: number,
-  targetWeight: number
-) {
-  const weightPerDay: { dayNumber: number; weight: number }[] = [];
+export function getDailyWeightLoss(weightInKg: number) {
   const percentageWeightLossInAWeek = 0.75;
   const dailyWeightLossFactor = percentageWeightLossInAWeek / 100 / 7;
-  let weight = currentWeight;
-  while (weight >= targetWeight) {
+  return weightInKg * dailyWeightLossFactor;
+}
+
+export function generateWeightLossPlan(
+  currentWeightInKg: number,
+  targetWeightInKg: number
+) {
+  const weightPerDay: { dayNumber: number; weight: number }[] = [];
+  let weight = currentWeightInKg;
+  while (weight >= targetWeightInKg) {
     weightPerDay.push({
       dayNumber: weightPerDay.length,
       weight,
     });
-    weight *= 1 - dailyWeightLossFactor;
+    weight -= getDailyWeightLoss(weight);
   }
   return weightPerDay;
+}
+
+function getNumberOfKiloCaloriesForFat(fatInKg: number) {
+  // 1kg fat -> 7,700 kcals
+  return 7700 * fatInKg;
+}
+
+export function calculateDailyKiloCalories(
+  gender: Gender,
+  weightInKg: number,
+  heightInCm: number,
+  ageInYears: number
+) {
+  const bmr = basalMetabolicRate(gender, weightInKg, heightInCm, ageInYears);
+  return bmr - getNumberOfKiloCaloriesForFat(getDailyWeightLoss(weightInKg));
 }

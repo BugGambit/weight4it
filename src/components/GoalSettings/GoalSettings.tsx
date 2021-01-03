@@ -65,7 +65,10 @@ function GoalSettings({ onSubmit }: GoalSettingsProps) {
   if (!profile) return null;
   const bmiRange = healtyBMIRange(profile.heightInCm);
   const minTargetWeight = Math.floor(bmiRange.min);
-  const maxTargetWeight = Math.ceil(bmiRange.max);
+  const maxTargetWeight = Math.min(
+    Math.ceil(bmiRange.max),
+    Math.floor(profile.currentWeightInKg)
+  );
   const weightLossPlan = generateWeightLossPlan(
     profile.currentWeightInKg,
     targetWeight || profile.currentWeightInKg
@@ -104,12 +107,11 @@ function GoalSettings({ onSubmit }: GoalSettingsProps) {
         </Text>
         <Slider
           value={targetWeight}
-          min={Math.floor(bmiRange.min)}
-          max={Math.ceil(bmiRange.max)}
+          min={minTargetWeight}
+          max={maxTargetWeight}
           marks={{
             [minTargetWeight]: `${minTargetWeight} kg`,
             [maxTargetWeight]: `${maxTargetWeight} kg`,
-            // [idealWeightInKg]: 'ideal',
           }}
           onChange={setTargetWeight}
           style={{

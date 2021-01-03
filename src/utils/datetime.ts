@@ -18,6 +18,10 @@ export function addDays(date: Date, days: number) {
   return result;
 }
 
+export function getYearsDifference(date1: Date, date2: Date) {
+  return Math.abs(date1.getFullYear() - date2.getFullYear());
+}
+
 export function dateToYMD(date: Date) {
   const strArray = [
     'Jan',
@@ -37,4 +41,16 @@ export function dateToYMD(date: Date) {
   const m = strArray[date.getMonth()];
   const y = date.getFullYear();
   return `${d} ${m} ${y}`;
+}
+
+export function stringifyDate(date: Date) {
+  const d = date.getDate();
+  const m = date.getMonth();
+  const y = date.getFullYear();
+  return `${d}-${m + 1}-${y}`;
+}
+
+export function parseDate(str: string) {
+  const [d, m, y] = str.split('-').map(Number);
+  return new Date(y, m - 1, d);
 }
