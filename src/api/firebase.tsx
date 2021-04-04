@@ -8,7 +8,6 @@ import isDev from 'utils/environment';
 
 function initializeApp() {
   firebase.initializeApp({
-    apiKey: 'AIzaSyCdd717G9x67acebK4g1wSW9a9ZlmCAxwA',
     authDomain: 'weight4it-staging.firebaseapp.com',
     projectId: 'weight4it-staging',
     storageBucket: 'weight4it-staging.appspot.com',
