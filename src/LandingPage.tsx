@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { readLastWeight, supabase } from './supabase';
 import CurrentWeight from './CurrentWeight';
 import NewWeight from './NewWeight';
-import { CapturePicture } from './CapturePicture';
+import { UploadImage } from './UploadImage';
 
 export default function LandingPage() {
   const onLogout = useCallback(async () => {
@@ -18,7 +18,7 @@ export default function LandingPage() {
     <>
       <CurrentWeight />
       <NewWeight />
-      <CapturePicture />
+      <UploadImage />
       <button onClick={onLogout}>logout</button>
       <button onClick={onReadWeights}>read weights</button>
     </>

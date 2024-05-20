@@ -38,20 +38,28 @@ export async function readLastWeight(): Promise<{
   };
 }
 
-supabase.auth.onAuthStateChange((event, session) => {
-  console.log(event, session);
-
-  if (event === 'INITIAL_SESSION') {
-    // handle initial session
-  } else if (event === 'SIGNED_IN') {
-    // handle sign in event
-  } else if (event === 'SIGNED_OUT') {
-    // handle sign out event
-  } else if (event === 'PASSWORD_RECOVERY') {
-    // handle password recovery event
-  } else if (event === 'TOKEN_REFRESHED') {
-    // handle token refreshed event
-  } else if (event === 'USER_UPDATED') {
-    // handle user updated event
+export async function uploadFoodPicture(picture: File): Promise<void> {
+  const user = await supabase.auth.getUser();
+  if (!user || !user.data) {
+    console.error('No user found');
+    return;
   }
-});
+  const userId = user.data.user?.id;
+  const date = new Date();
+
+  const fileExtMap: Record<string, string> = {
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+  };
+  const fileExt = fileExtMap[picture.type];
+  if (!fileExt) {
+    console.error(`Unknown file type: ${picture.type}`);
+    return;
+  }
+
+  await supabase.storage
+    .from('food-pictures')
+    .upload(`${userId}/${date.toISOString()}.${fileExt}`, picture, {
+      contentType: picture.type,
+    });
+}
