@@ -1,26 +1,30 @@
-import { useCallback } from 'react';
-import { readLastWeight, supabase } from './supabase';
+import { useCallback, useState } from 'react';
+import { supabase } from './supabase';
 import CurrentWeight from './CurrentWeight';
-import NewWeight from './NewWeight';
 import { UploadImage } from './UploadImage';
+import { Button, Divider } from '@chakra-ui/react';
+import { SubmitWeightModal } from './SubmitWeightModal';
 
 export default function LandingPage() {
+  const [isSubmitWeightModalOpen, setIsSubmitWeightModalOpen] = useState(false);
+
   const onLogout = useCallback(async () => {
     await supabase.auth.signOut();
-  }, []);
-
-  const onReadWeights = useCallback(async () => {
-    const lastWeight = await readLastWeight();
-    console.log(lastWeight);
   }, []);
 
   return (
     <>
       <CurrentWeight />
-      <NewWeight />
+      <Button onClick={() => setIsSubmitWeightModalOpen(true)}>
+        Submit your current weight
+      </Button>
+      <SubmitWeightModal
+        isOpen={isSubmitWeightModalOpen}
+        onClose={() => setIsSubmitWeightModalOpen(false)}
+      />
+      <Divider />
       <UploadImage />
-      <button onClick={onLogout}>logout</button>
-      <button onClick={onReadWeights}>read weights</button>
+      <Button onClick={onLogout}>Log out</Button>
     </>
   );
 }
