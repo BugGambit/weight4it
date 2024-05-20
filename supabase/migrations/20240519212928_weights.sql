@@ -11,5 +11,5 @@ ALTER TABLE ONLY weights
 
 ALTER TABLE weights ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "User can see their own weights only." ON weights FOR SELECT USING ((( SELECT auth.uid() AS "uid") = user_id));
-CREATE POLICY "Users can upload their own weight." ON weights FOR INSERT TO "authenticated" WITH CHECK ((( SELECT auth.uid() AS "uid") = user_id));
+CREATE POLICY "User can see their own weights only." ON weights FOR SELECT USING ((( SELECT auth.uid() AS "uid") = "user_id"));
+CREATE POLICY "Users can upload their own weight." ON weights FOR INSERT TO "authenticated" WITH CHECK ((( SELECT auth.uid() AS "uid") = "user_id"));
