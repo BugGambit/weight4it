@@ -1,14 +1,11 @@
-import { useCallback } from "react";
-import { addWeight, readLastWeight, supabase } from "./supabase";
-import CurrentWeight from "./CurrentWeight";
+import { useCallback } from 'react';
+import { readLastWeight, supabase } from './supabase';
+import CurrentWeight from './CurrentWeight';
+import NewWeight from './NewWeight';
 
 export default function LandingPage() {
   const onLogout = useCallback(async () => {
     await supabase.auth.signOut();
-  }, []);
-
-  const onAddWeight = useCallback(async () => {
-    await addWeight(80);
   }, []);
 
   const onReadWeights = useCallback(async () => {
@@ -19,8 +16,8 @@ export default function LandingPage() {
   return (
     <>
       <CurrentWeight />
+      <NewWeight />
       <button onClick={onLogout}>logout</button>
-      <button onClick={onAddWeight}>add weight</button>
       <button onClick={onReadWeights}>read weights</button>
     </>
   );
