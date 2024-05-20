@@ -1,13 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
+import { config } from './config';
 
-const supabaseUrl = "http://127.0.0.1:54321";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0";
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient(config.supabaseUrl, config.supabaseKey);
 
 export async function login() {
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
+    provider: 'google',
     options: {
       redirectTo: `http://localhost:3000/auth/callback`,
     },
@@ -16,7 +14,7 @@ export async function login() {
 }
 
 export async function addWeight(weightInKg: number): Promise<void> {
-  await supabase.from("weights").insert({
+  await supabase.from('weights').insert({
     weight_in_kg: weightInKg,
   });
 }
@@ -26,10 +24,10 @@ export async function readLastWeight(): Promise<{
   createdAt: Date;
 } | null> {
   const res = await supabase
-    .from("weights")
-    .select("weight_in_kg,created_at")
+    .from('weights')
+    .select('weight_in_kg,created_at')
     .limit(1)
-    .order("created_at", { ascending: false })
+    .order('created_at', { ascending: false })
     .maybeSingle();
   if (!res.data) {
     return null;
@@ -43,17 +41,17 @@ export async function readLastWeight(): Promise<{
 supabase.auth.onAuthStateChange((event, session) => {
   console.log(event, session);
 
-  if (event === "INITIAL_SESSION") {
+  if (event === 'INITIAL_SESSION') {
     // handle initial session
-  } else if (event === "SIGNED_IN") {
+  } else if (event === 'SIGNED_IN') {
     // handle sign in event
-  } else if (event === "SIGNED_OUT") {
+  } else if (event === 'SIGNED_OUT') {
     // handle sign out event
-  } else if (event === "PASSWORD_RECOVERY") {
+  } else if (event === 'PASSWORD_RECOVERY') {
     // handle password recovery event
-  } else if (event === "TOKEN_REFRESHED") {
+  } else if (event === 'TOKEN_REFRESHED') {
     // handle token refreshed event
-  } else if (event === "USER_UPDATED") {
+  } else if (event === 'USER_UPDATED') {
     // handle user updated event
   }
 });
