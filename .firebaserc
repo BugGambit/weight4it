@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "weight4it-staging",
-    "weight4it-staging": "weight4it-staging"
+    "default": "weight4it-fredrik"
   }
 }
