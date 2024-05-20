@@ -15,7 +15,7 @@ export async function login() {
 
 export async function addWeight(weightInKg: number): Promise<void> {
   await supabase.from('weights').insert({
-    weight_in_kg: weightInKg,
+    weight_in_hektogram: Math.round(weightInKg * 10),
   });
 }
 
@@ -25,7 +25,7 @@ export async function readLastWeight(): Promise<{
 } | null> {
   const res = await supabase
     .from('weights')
-    .select('weight_in_kg,created_at')
+    .select('weight_in_hektogram,created_at')
     .limit(1)
     .order('created_at', { ascending: false })
     .maybeSingle();
@@ -33,7 +33,7 @@ export async function readLastWeight(): Promise<{
     return null;
   }
   return {
-    weightInKg: res.data.weight_in_kg,
+    weightInKg: res.data.weight_in_hektogram / 10,
     createdAt: new Date(res.data.created_at),
   };
 }

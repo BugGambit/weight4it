@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS weights (
     user_id uuid DEFAULT auth.uid() NOT NULL,
     created_at DATE NOT NULL DEFAULT CURRENT_DATE,
-    weight_in_kg integer NOT NULL,
+    weight_in_hektogram integer NOT NULL,
     PRIMARY KEY(user_id, created_at),
-    CONSTRAINT "weights_weight_in_kg_check" CHECK ((weight_in_kg > 0))
+    CONSTRAINT "weights_weight_in_hektogram_check" CHECK ((weight_in_hektogram > 0))
 );
 
 ALTER TABLE ONLY weights
