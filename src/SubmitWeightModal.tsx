@@ -36,7 +36,7 @@ export function SubmitWeightModal({ isOpen, onClose }: Props) {
   });
 
   const onWeightChange = useCallback((valueAsString: string) => {
-    setWeight(valueAsString);
+    setWeight(valueAsString.replace(',', '.'));
   }, []);
 
   const onSubmit = useCallback(async () => {
@@ -57,6 +57,8 @@ export function SubmitWeightModal({ isOpen, onClose }: Props) {
           <FormControl isRequired>
             <FormLabel>Weight</FormLabel>
             <NumberInput
+              isValidCharacter={(char) => /[0-9.,]/.test(char)}
+              pattern="[0-9]+([,\.][0-9]+)?"
               min={0}
               max={500}
               precision={1}
