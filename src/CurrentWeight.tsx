@@ -1,10 +1,11 @@
 import { daysBetween, isToday } from './dateUtils';
+import { queryKeys } from './queryKeys';
 import { readLastWeight } from './supabase';
 import { useQuery } from '@tanstack/react-query';
 
 export default function CurrentWeight() {
   const getWeightQuery = useQuery({
-    queryKey: ['weight', 'get'],
+    queryKey: queryKeys.getWeight,
     queryFn: readLastWeight,
   });
 

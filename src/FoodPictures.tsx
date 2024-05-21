@@ -1,6 +1,7 @@
 import { Image, Wrap, WrapItem } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { getFoodPicturesForADay } from './supabase';
+import { queryKeys } from './queryKeys';
 
 type Props = {
   date: Date;
@@ -8,7 +9,7 @@ type Props = {
 
 export function FoodPictures({ date }: Props) {
   const fetchPicturesQuery = useQuery({
-    queryKey: ['foodPictures', date.toDateString()],
+    queryKey: [queryKeys.foodPictures, date.toDateString()],
     queryFn: () => getFoodPicturesForADay(date),
   });
 
