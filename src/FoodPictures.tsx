@@ -11,6 +11,7 @@ export function FoodPictures({ date }: Props) {
   const fetchPicturesQuery = useQuery({
     queryKey: [queryKeys.foodPictures, date.toDateString()],
     queryFn: () => getFoodPicturesForADay(date),
+    refetchOnWindowFocus: false,
   });
 
   if (fetchPicturesQuery.isLoading) {
