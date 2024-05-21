@@ -1,0 +1,1 @@
+CREATE POLICY "Give users access to own folder hd805g_1" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'food-pictures' AND (select auth.uid()::text) = (storage.foldername(name))[1]);

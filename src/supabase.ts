@@ -1,16 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 import { config } from './config';
+import { getDateStr } from './dateUtils';
 
 export const supabase = createClient(config.supabaseUrl, config.supabaseKey);
+const foodPicturesBucketName = 'food-pictures';
 
 export async function login() {
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
       redirectTo: `http://localhost:3000/auth/callback`,
     },
   });
-  console.log({ data, error });
 }
 
 export async function addWeight(weightInKg: number): Promise<void> {
@@ -38,13 +39,16 @@ export async function readLastWeight(): Promise<{
   };
 }
 
-export async function uploadFoodPicture(picture: File): Promise<void> {
+async function getRequiredUserId(): Promise<string> {
   const user = await supabase.auth.getUser();
-  if (!user || !user.data) {
-    console.error('No user found');
-    return;
+  if (!user.data.user) {
+    throw new Error('No user found');
   }
-  const userId = user.data.user?.id;
+  return user.data.user.id;
+}
+
+export async function uploadFoodPicture(picture: File): Promise<void> {
+  const userId = await getRequiredUserId();
   const date = new Date();
 
   const fileExtMap: Record<string, string> = {
@@ -58,8 +62,13 @@ export async function uploadFoodPicture(picture: File): Promise<void> {
   }
 
   await supabase.storage
-    .from('food-pictures')
-    .upload(`${userId}/${date.toISOString()}.${fileExt}`, picture, {
-      contentType: picture.type,
-    });
+    .from(foodPicturesBucketName)
+    .upload(
+      `${userId}/${getDateStr()}/${date.toISOString()}.${fileExt}`,
+      picture,
+      {
+        contentType: picture.type,
+      }
+    );
+}
 }

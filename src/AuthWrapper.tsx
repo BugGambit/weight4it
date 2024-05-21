@@ -1,8 +1,8 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { supabase } from "./supabase";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { Session } from "@supabase/supabase-js";
+import { PropsWithChildren, useEffect, useState } from 'react';
+import { supabase } from './supabase';
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { Session } from '@supabase/supabase-js';
 
 export default function AuthWrapper(props: PropsWithChildren) {
   const [session, setSession] = useState<Session | null>(null);
@@ -10,7 +10,6 @@ export default function AuthWrapper(props: PropsWithChildren) {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      supabase.auth.getUser().then(console.log);
     });
 
     const {
@@ -26,7 +25,7 @@ export default function AuthWrapper(props: PropsWithChildren) {
     return (
       <Auth
         supabaseClient={supabase}
-        providers={["google"]}
+        providers={['google']}
         onlyThirdPartyProviders
         appearance={{ theme: ThemeSupa }}
       />
