@@ -55,7 +55,7 @@ export function SubmitWeightModal({ isOpen, onClose }: Props) {
         <ModalCloseButton />
         <ModalBody pb={6}>
           <FormControl isRequired>
-            <FormLabel>Weight</FormLabel>
+            <FormLabel>Weight (kg)</FormLabel>
             <NumberInput
               isValidCharacter={(char) => /[0-9.,]/.test(char)}
               pattern="[0-9]+([,\.][0-9]+)?"
