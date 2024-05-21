@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { supabase } from './supabase';
 import CurrentWeight from './CurrentWeight';
 import { UploadImage } from './UploadImage';
-import { Button, Divider } from '@chakra-ui/react';
+import { Button, Divider, Stack } from '@chakra-ui/react';
 import { SubmitWeightModal } from './SubmitWeightModal';
 import { FoodPictures } from './FoodPictures';
 
@@ -15,7 +15,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <>
+    <Stack gap={5}>
       <CurrentWeight />
       <Button onClick={() => setIsSubmitWeightModalOpen(true)}>
         Submit your current weight
@@ -28,6 +28,6 @@ export default function LandingPage() {
       <UploadImage />
       <FoodPictures date={date} />
       <Button onClick={onLogout}>Log out</Button>
-    </>
+    </Stack>
   );
 }

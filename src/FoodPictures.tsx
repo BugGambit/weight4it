@@ -1,4 +1,4 @@
-import { Image, Stack } from '@chakra-ui/react';
+import { Image, Wrap, WrapItem } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { getFoodPicturesForADay } from './supabase';
 
@@ -17,15 +17,17 @@ export function FoodPictures({ date }: Props) {
   }
 
   return (
-    <Stack direction="row">
+    <Wrap align="center" justify={'center'}>
       {fetchPicturesQuery.data?.map((item) => (
-        <Image
-          boxSize="200px"
-          objectFit="scale-down"
-          src={item.imageUrl}
-          alt="Food picture"
-        />
+        <WrapItem key={item.imageUrl}>
+          <Image
+            boxSize="150px"
+            objectFit="scale-down"
+            src={item.imageUrl}
+            alt="Food picture"
+          />
+        </WrapItem>
       ))}
-    </Stack>
+    </Wrap>
   );
 }

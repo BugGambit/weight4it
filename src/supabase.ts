@@ -84,7 +84,14 @@ export async function getFoodPicturesForADay(
     throw new Error('Failed to fetch food pictures');
   }
 
-  const paths = res.data.map((item) => `${folder}/${item.name}`);
+  const paths = res.data
+    .filter((item) => item.name !== '.emptyFolderPlaceholder')
+    .map((item) => `${folder}/${item.name}`);
+
+  if (paths.length === 0) {
+    return [];
+  }
+
   const expiresInSeconds = 60 * 60; // 1 hour
   const signedUrls = await supabase.storage
     .from(foodPicturesBucketName)
