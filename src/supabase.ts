@@ -72,10 +72,29 @@ export async function uploadFoodPicture(picture: File): Promise<void> {
     );
 }
 
-export async function listFoodPictures(): Promise<void> {
+export async function getFoodPicturesForADay(
+  date: Date
+): Promise<{ imageUrl: string }[]> {
   const userId = await getRequiredUserId();
-  const res = await supabase.storage
+  const folder = `${userId}/${getDateStr(date)}`;
+  const res = await supabase.storage.from(foodPicturesBucketName).list(folder);
+
+  if (res.error) {
+    console.error(res.error);
+    throw new Error('Failed to fetch food pictures');
+  }
+
+  const paths = res.data.map((item) => `${folder}/${item.name}`);
+  const expiresInSeconds = 60 * 60; // 1 hour
+  const signedUrls = await supabase.storage
     .from(foodPicturesBucketName)
-    .list(`${userId}/${getDateStr()}`, {});
-  console.log('res: ', res);
+    .createSignedUrls(paths, expiresInSeconds);
+
+  return (
+    signedUrls.data?.map((item) => {
+      return {
+        imageUrl: item.signedUrl,
+      };
+    }) || []
+  );
 }
