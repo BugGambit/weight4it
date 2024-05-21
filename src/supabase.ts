@@ -71,4 +71,11 @@ export async function uploadFoodPicture(picture: File): Promise<void> {
       }
     );
 }
+
+export async function listFoodPictures(): Promise<void> {
+  const userId = await getRequiredUserId();
+  const res = await supabase.storage
+    .from(foodPicturesBucketName)
+    .list(`${userId}/${getDateStr()}`, {});
+  console.log('res: ', res);
 }

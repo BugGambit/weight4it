@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react';
-import { supabase } from './supabase';
+import { useCallback, useEffect, useState } from 'react';
+import { listFoodPictures, supabase } from './supabase';
 import CurrentWeight from './CurrentWeight';
 import { UploadImage } from './UploadImage';
 import { Button, Divider } from '@chakra-ui/react';
@@ -10,6 +10,10 @@ export default function LandingPage() {
 
   const onLogout = useCallback(async () => {
     await supabase.auth.signOut();
+  }, []);
+
+  useEffect(() => {
+    listFoodPictures();
   }, []);
 
   return (
