@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { config } from './config';
 import { getDateStr } from './dateUtils';
+import { processImage } from './imageProcessing';
 
 export const supabase = createClient(config.supabaseUrl, config.supabaseKey);
 const foodPicturesBucketName = 'food-pictures';
@@ -48,24 +49,16 @@ async function getRequiredUserId(): Promise<string> {
 }
 
 export async function uploadFoodPicture(picture: File): Promise<void> {
+  const processedImage = await processImage(picture);
+
   const userId = await getRequiredUserId();
   const date = new Date();
-
-  const fileExtMap: Record<string, string> = {
-    'image/jpeg': 'jpg',
-    'image/png': 'png',
-  };
-  const fileExt = fileExtMap[picture.type];
-  if (!fileExt) {
-    console.error(`Unknown file type: ${picture.type}`);
-    return;
-  }
 
   await supabase.storage
     .from(foodPicturesBucketName)
     .upload(
-      `${userId}/${getDateStr()}/${date.toISOString()}.${fileExt}`,
-      picture,
+      `${userId}/${getDateStr()}/${date.toISOString()}.jpg`,
+      processedImage,
       {
         contentType: picture.type,
       }
